@@ -2,8 +2,8 @@
 
 ## How to use `cn` function in tailwind - react.js or react.ts
 
-1.  [cn function](#cn-function)
-2.  [button (reusable)](#reusable-button)
+1.  [CN Function](#cn-function)
+2.  [Reusable Button js/ts](#reusable-button)
 
 ## cn Function
 
@@ -66,7 +66,7 @@ export default App;
 
 ---
 
-## Reusable button #button
+## Reusable Button
 
 `for typeScript`-- modify for javascript as necessary
 
