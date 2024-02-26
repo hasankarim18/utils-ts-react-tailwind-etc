@@ -7,7 +7,11 @@ type TContainer = {
 };
 
 const Container = ({ className, children }: TContainer) => {
-  return <div className={cn(`max-w-7xl mx-auto `, className)}>{children}</div>;
+  return (
+    <div className={cn(`max-w-[1240px] mx-auto px-[20px] `, className)}>
+      {children}
+    </div>
+  );
 };
 
 export default Container;

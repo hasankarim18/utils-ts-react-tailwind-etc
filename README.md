@@ -7,6 +7,7 @@
 3.  [Mange `routes` ](#manage-routes)
 4.  [Extending tailwind](#extend-tailwind)
 5.  [tailwind-merge `twMerge`](#tailwind-merge)
+6.  [Clsx with twMerge](#clsx-with-twmerge)
 
 ## cn Function
 
@@ -44,6 +45,47 @@ const Container = ({ className, children }: TContainer) => {
 };
 
 export default Container;
+
+```
+
+### CN used in Button with conditional rendering
+
+```
+type TButton = {
+  className: string;
+  outline: boolean;
+};
+
+const Button = ({ className, outline }: TButton) => {
+  return (
+    <button
+      className={cn(
+        "px-4 py-2 rounded-md",
+        {
+          "border-4 border-purple-700": outline,
+        },
+        className
+      )}
+    >
+      Click
+    </button>
+  );
+};
+
+-----------------------
+// in App.tsx
+import Button from "../components/ui/Button";
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home page</h1>
+      <Button outline className=" bg-red-400  " />
+    </div>
+  );
+};
+
+export default Home;
 
 ```
 
@@ -223,6 +265,8 @@ import { twMerge } from "tailwind-merge";
 
 type TButton = {
   className: string;
+  variant: string;
+  textColor: string;
 };
 
 const Button = ({ className, ...rest }: TButton) => {
@@ -237,3 +281,69 @@ export default Button;
 
 
 ```
+
+---
+
+## Clsx with twmerge
+
+- `clsx` and `twMerge`
+- `clsx` is used for conditional `className` rendering and `twMerge` is used for merging className without conflict.
+
+```
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
+type TButton = {
+  className: string;
+  variant: boolean;
+};
+
+const Button = ({ className, variant, textColor }: TButton) => {
+  const color = `text-${textColor}-500`;
+  console.log(color);
+  return (
+    <button
+      className={twMerge(
+        clsx(
+          {
+            " border-2  border-purple-500": variant === "outline",
+          },
+          {
+            "text-green-800": textColor === "green",
+          },
+          "text-2xl font-semibold",
+          className
+        )
+      )}
+    >
+      Click
+    </button>
+  );
+};
+
+export default Button;
+
+```
+
+- `clsx` is written inside `twMerge`
+
+- conditional className is rewritten in object you can use as much object as you can
+
+- can be used as below
+
+```
+const Home = () => {
+  return (
+    <div>
+      <h1>Home page</h1>
+      <Button
+        textColor="green"
+        variant="outline"
+        className="px-4 py-2 rounded-md bg-red-400  "
+      />
+    </div>
+  );
+};
+```
+
+### The better way is cn function

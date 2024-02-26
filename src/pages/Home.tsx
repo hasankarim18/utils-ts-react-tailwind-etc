@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home page</h1>
-      <Button className="bg-yellow-500" />
+      <Button outline className=" bg-red-400  " />
     </div>
   );
 };

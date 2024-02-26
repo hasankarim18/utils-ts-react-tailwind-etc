@@ -1,12 +1,21 @@
-import { twMerge } from "tailwind-merge";
+import { cn } from "../../utils/cn";
 
 type TButton = {
   className: string;
+  outline: boolean;
 };
 
-const Button = ({ className, ...rest }: TButton) => {
+const Button = ({ className, outline }: TButton) => {
   return (
-    <button {...rest} className={twMerge(`bg-red-500`, className)}>
+    <button
+      className={cn(
+        "px-4 py-2 rounded-md",
+        {
+          "border-4 border-purple-700": outline,
+        },
+        className
+      )}
+    >
       Click
     </button>
   );
