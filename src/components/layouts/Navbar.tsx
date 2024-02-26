@@ -1,29 +1,32 @@
 import { NavLink } from "react-router-dom";
-
-interface NavLinkProps {
-  isActive: boolean;
-}
+import activeClass from "../../utils/activeClass";
 
 const Navbar = () => {
-  const activeClass = ({ isActive }: NavLinkProps) => {
-    return {
-      textDecoration: isActive ? "underline" : "none",
-    };
-  };
-
   return (
-    <div className="flex gap-4">
-      <NavLink style={activeClass} className="text-2xl hover:underline" to="/">
-        {" "}
-        Home
-      </NavLink>
-      <NavLink
-        style={activeClass}
-        className="text-2xl hover:underline"
-        to="/about"
-      >
-        About{" "}
-      </NavLink>
+    <div className="flex gap-4 justify-between my-2">
+      <div className="flex gap-4">
+        <NavLink
+          style={activeClass}
+          className="text-2xl hover:underline"
+          to="/"
+        >
+          {" "}
+          Home
+        </NavLink>
+        <NavLink
+          //  style={activeClass}
+          className="text-2xl hover:underline"
+          to="/about"
+        >
+          About{" "}
+        </NavLink>
+      </div>
+      <div>
+        <NavLink className="text-2xl hover:underline" to="/admin">
+          {" "}
+          Dashboard{" "}
+        </NavLink>
+      </div>
     </div>
   );
 };

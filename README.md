@@ -4,6 +4,7 @@
 
 1.  [CN Function](#cn-function)
 2.  [Reusable Button js/ts](#reusable-button)
+3.  [Mange `routes` ](#manage-routes)
 
 ## cn Function
 
@@ -128,5 +129,55 @@ Button.displayName = "Button"
 
 export { Button, buttonVariants }
 
+
+```
+
+---
+
+## Manage Routes
+
+- See in routes
+
+```
+import { Navigate, createBrowserRouter } from "react-router-dom";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+
+    children: [
+      {
+        path: "", // will match with the parent
+        element: <Navigate to="dashboard" />,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "add-user",
+        element: <AddUser />,
+      },
+    ],
+  },
+]);
+
+export default router;
 
 ```
