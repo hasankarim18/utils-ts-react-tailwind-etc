@@ -2,10 +2,10 @@
 
 ## How to use `cn` function in tailwind - react.js or react.ts
 
-1.  [cn function](#cn)
-2.  [button (reusable)](#button)
+1.  [cn function](#cn-function)
+2.  [button (reusable)](#reusable-button)
 
-#cn Function
+## cn Function
 
 - First write the cn function and export it <br/>
   - Install `clsx` and `tailwind-merge`
