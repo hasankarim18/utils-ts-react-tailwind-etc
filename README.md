@@ -66,7 +66,7 @@ export default App;
 
 ---
 
-## Reusable Button #button
+## Reusable button #button
 
 `for typeScript`-- modify for javascript as necessary
 
