@@ -2,14 +2,14 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import AddUser from "../components/layouts/AdminComponents/AddUser";
 import Dashboard from "../components/layouts/AdminComponents/Dashboard";
 import AdminLayout from "../components/layouts/AdminLayout";
-import MainLayout from "../components/layouts/MainLayout";
 import About from "../pages/About";
 import Home from "../pages/Home";
+import App from "../App";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: <App />,
     children: [
       {
         index: true,

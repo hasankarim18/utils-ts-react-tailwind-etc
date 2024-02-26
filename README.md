@@ -5,6 +5,8 @@
 1.  [CN Function](#cn-function)
 2.  [Reusable Button js/ts](#reusable-button)
 3.  [Mange `routes` ](#manage-routes)
+4.  [Extending tailwind](#extend-tailwind)
+5.  [tailwind-merge `twMerge`](#tailwind-merge)
 
 ## cn Function
 
@@ -179,5 +181,59 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
+```
+
+---
+
+## Extend Tailwind
+
+```
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      backgroundImage: {
+        "primary-gradient": "linear-gradient(30deg,#fb923c, #047857)",
+      },
+    },
+  },
+  plugins: [],
+};
+
+```
+
+- Apply in components
+
+```
+ <div className={cn(`max-w-7xl mx-auto bg-primary-gradient`, className)}>
+      {children}
+  </div>
+```
+
+---
+
+## Tailwind Merge
+
+- Tailwind merge solve the problem of tailwind merging
+
+```
+import { twMerge } from "tailwind-merge";
+
+type TButton = {
+  className: string;
+};
+
+const Button = ({ className, ...rest }: TButton) => {
+  return (
+    <button {...rest} className={twMerge(`bg-red-500`, className)}>
+      Click
+    </button>
+  );
+};
+
+export default Button;
+
 
 ```
