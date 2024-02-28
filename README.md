@@ -354,18 +354,28 @@ const Home = () => {
 ## Reusable button simple version
 
 ```
-import { ReactNode, forwardRef } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef } from "react";
 import { cn } from "../../utils/cn";
 
-type TButton = {
-  className: string;
-  children: ReactNode;
-  variant: string;
+
+
+type TVariant = "solid" | "ghost" | "outline";
+
+type TButtonOPtions = {
+  variant?: TVariant;
 };
 
-const Button = forwardRef(
-  ({ className, children, variant, ...rest }: TButton, ref) => {
-    const getVariant = (variant: string) => {
+type TRef = HTMLButtonElement;
+
+type TButton = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> &
+  TButtonOPtions;
+
+const Button = forwardRef<TRef, TButton>(
+  ({ className, children, variant = "solid", ...rest }, ref) => {
+    const getVariant = (variant: TVariant) => {
       switch (variant) {
         case "outline":
           return "btn-outline";
@@ -378,7 +388,11 @@ const Button = forwardRef(
     };
 
     return (
-      <button {...rest} className={cn("", getVariant(variant), className)}>
+      <button
+        ref={ref}
+        {...rest}
+        className={cn("", getVariant(variant), className)}
+      >
         {children}
       </button>
     );
@@ -386,6 +400,7 @@ const Button = forwardRef(
 );
 
 export default Button;
+
 
 
 ```
