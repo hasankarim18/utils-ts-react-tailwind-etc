@@ -8,6 +8,7 @@
 4.  [Extending tailwind](#extend-tailwind)
 5.  [tailwind-merge `twMerge`](#tailwind-merge)
 6.  [Clsx with twMerge](#clsx-with-twmerge)
+7.  [Reusable button simple version](#reusable-button-simple-version)
 
 ## cn Function
 
@@ -347,3 +348,49 @@ const Home = () => {
 ```
 
 ### The better way is cn function
+
+---
+
+## Reusable button simple version
+
+```
+import { ReactNode, forwardRef } from "react";
+import { cn } from "../../utils/cn";
+
+type TButton = {
+  className: string;
+  children: ReactNode;
+  variant: string;
+};
+
+const Button = forwardRef(
+  ({ className, children, variant, ...rest }: TButton, ref) => {
+    const getVariant = (variant: string) => {
+      switch (variant) {
+        case "outline":
+          return "btn-outline";
+
+        case "ghost":
+          return "btn-ghost";
+        default:
+          return "btn-solid";
+      }
+    };
+
+    return (
+      <button {...rest} className={cn("", getVariant(variant), className)}>
+        {children}
+      </button>
+    );
+  }
+);
+
+export default Button;
+
+
+```
+
+- 3 variant is used "solid", "outline", "ghost"
+- 3 differnet class is written in css
+- `...rest` is used for all other parameter, such as onClick, onMouseEnter etc.
+- `forwardRef` is used for forwarding ref
