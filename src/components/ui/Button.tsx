@@ -1,22 +1,28 @@
+import { ReactNode } from "react";
 import { cn } from "../../utils/cn";
 
 type TButton = {
   className: string;
-  outline: boolean;
+  children: ReactNode;
+  variant: string;
 };
 
-const Button = ({ className, outline }: TButton) => {
+const Button = ({ className, children, variant }: TButton) => {
+  const getVariant = (variant) => {
+    switch (variant) {
+      case "outline":
+        return "btn-outline";
+
+      case "ghost":
+        return "btn-ghost";
+      default:
+        return "btn-solid";
+    }
+  };
+
   return (
-    <button
-      className={cn(
-        "px-4 py-2 rounded-md",
-        {
-          "border-4 border-purple-700": outline,
-        },
-        className
-      )}
-    >
-      Click
+    <button className={cn("", getVariant(variant), className)}>
+      {children}
     </button>
   );
 };

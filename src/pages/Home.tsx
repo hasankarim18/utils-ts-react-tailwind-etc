@@ -4,7 +4,9 @@ const Home = () => {
   return (
     <div>
       <h1>Home page</h1>
-      <Button outline className=" bg-red-400  " />
+      <Button variant="ghost" className=" w-[500px] ">
+        Button click
+      </Button>
     </div>
   );
 };
